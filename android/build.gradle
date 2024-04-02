@@ -68,5 +68,5 @@ android {
 }
 
 dependencies {
-    implementation files('libs/microsensysRFID_6.11.aar')
+    compileOnly files('libs/microsensysRFID_6.11.aar')
 }
