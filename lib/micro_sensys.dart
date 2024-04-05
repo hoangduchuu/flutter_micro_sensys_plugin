@@ -5,4 +5,11 @@ class MicroSensys {
   Future<String?> getPlatformVersion() {
     return MicroSensysPlatform.instance.getPlatformVersion();
   }
+
+  Future<bool?> initReader() {
+    return MicroSensysPlatform.instance.initReader();
+  }
+  Future<String?> identifyTag() {
+    return MicroSensysPlatform.instance.identifyTag();
+  }
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:micro_sensys/micro_sensys.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +18,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  String _initializeStatus = 'Unknown';
+  String _tagNumber = 'Unknown';
   final _microSensysPlugin = MicroSensys();
 
   @override
@@ -31,8 +34,7 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
-          await _microSensysPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _microSensysPlugin.getPlatformVersion() ?? 'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -54,8 +56,93 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Column(
+          children: [
+            Center(
+              child: Column(
+                children: [
+                  Text('Running on: $_platformVersion\n'),
+                  Text('_initializeStatus: $_initializeStatus\n'),
+                  Text('_tagNumber : $_tagNumber\n'),
+                ],
+              ),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  _microSensysPlugin.initReader().then((value) {
+                    setState(() {
+                      _initializeStatus = value == true ? 'Success' : 'Failed';
+                    });
+                  }).catchError((onError) {
+                    setState(() {
+                      _initializeStatus = 'Failed : ${onError.toString()}';
+                    });
+                  });
+                },
+                child: const Text('Init Reader')),
+            ElevatedButton(
+                onPressed: () {
+                  Permission.bluetooth.request().then((value) {
+                    print('Request Permisson: $value');
+                  }).catchError((onError) {
+                    print('Request Permisson Error: $onError');
+                  });
+
+                  Permission.bluetoothScan.request().then((value) {
+                    print('Request Permisson: $value');
+                  }).catchError((onError) {
+                    print('Request Permisson Error: $onError');
+                  });
+
+                  Permission.bluetoothConnect.request().then((value) {
+                    print('Request Permisson: $value');
+                  }).catchError((onError) {
+                    print('Request Permisson Error: $onError');
+                  });
+
+                  Permission.location.request().then((value) {
+                    print('Request Permisson: $value');
+                  }).catchError((onError) {
+                    print('Request Permisson Error: $onError');
+                  });
+                },
+                child: const Text('Request Permisson')),
+            ElevatedButton(
+                onPressed: () {
+                  _microSensysPlugin.identifyTag().then((value) {
+                    setState(() {
+                      _tagNumber = value.toString();
+                    });
+                  }).catchError((onError) {
+                    setState(() {
+                      _tagNumber = 'Failed : ${onError.toString()}';
+                    });
+                  });
+                },
+                child: const Text('Identify')),
+            ElevatedButton(
+                onPressed: () {
+                Timer.periodic(Duration(milliseconds: 200), (timer) {
+                  _microSensysPlugin.identifyTag().then((value) {
+                    setState(() {
+                      _tagNumber = value.toString();
+                    });
+                  }).catchError((onError) {
+                    setState(() {
+                      _tagNumber = 'Failed : ${onError.toString()}';
+                    });
+                  });
+                });
+                },
+                child: const Text('Identify in Loop')),
+            ElevatedButton(
+                onPressed: () {
+                 setState(() {
+                    _tagNumber = 'Cleared';
+                 });
+                },
+                child: const Text('Clear TAG')),
+          ],
         ),
       ),
     );

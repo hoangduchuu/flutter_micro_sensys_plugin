@@ -26,4 +26,12 @@ abstract class MicroSensysPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<bool?> initReader() {
+    throw UnimplementedError('initReader() has not been implemented.');
+  }
+
+  Future<String?> identifyTag() {
+    throw UnimplementedError('initReader() has not been implemented.');
+  }
 }

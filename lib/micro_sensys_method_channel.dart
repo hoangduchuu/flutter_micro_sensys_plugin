@@ -14,4 +14,13 @@ class MethodChannelMicroSensys extends MicroSensysPlatform {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
+
+
+  Future<bool?> initReader() {
+    return methodChannel.invokeMethod<bool>('initReader');
+  }
+
+  Future<String?> identifyTag() {
+    return methodChannel.invokeMethod<String?>('identifyTag');
+  }
 }

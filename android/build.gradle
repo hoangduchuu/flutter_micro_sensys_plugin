@@ -18,6 +18,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -68,5 +69,9 @@ android {
 }
 
 dependencies {
-    compileOnly files('libs/microsensysRFID_6.11.aar')
+//    compileOnly files('libs/microsensysRFID_6.11.aar')
+    implementation files('libs/microsensysRFID_6.11.aar')
+//    implementation fileTree(include: [
+//    '*.aar'], dir: 'libs')
+
 }
