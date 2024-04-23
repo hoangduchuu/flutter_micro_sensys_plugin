@@ -1,0 +1,11 @@
+framework module microsensys_lib {
+  umbrella header "microsensys_lib.h"
+  export *
+
+  module * { export * }
+}
+
+module microsensys_lib.Swift {
+  header "microsensys_lib-Swift.h"
+  requires objc
+}
