@@ -83,27 +83,27 @@ class _MyAppState extends State<MyApp> {
             ElevatedButton(
                 onPressed: () {
                   Permission.bluetooth.request().then((value) {
-                    print('Request Permisson: $value');
+                    print('Request Permisson1 OK: $value');
                   }).catchError((onError) {
-                    print('Request Permisson Error: $onError');
+                    print('Request Permisson1 Error: $onError');
                   });
 
                   Permission.bluetoothScan.request().then((value) {
-                    print('Request Permisson: $value');
+                    print('Request Permisson2 OK: $value');
                   }).catchError((onError) {
-                    print('Request Permisson Error: $onError');
+                    print('Request Permisson2 Error: $onError');
                   });
 
                   Permission.bluetoothConnect.request().then((value) {
-                    print('Request Permisson: $value');
+                    print('Request Permisson3 OK: $value');
                   }).catchError((onError) {
-                    print('Request Permisson Error: $onError');
+                    print('Request Permisson3 Error: $onError');
                   });
 
                   Permission.location.request().then((value) {
-                    print('Request Permisson: $value');
+                    print('Request Permisson4: $value');
                   }).catchError((onError) {
-                    print('Request Permisson Error: $onError');
+                    print('Request Permisson4 Error: $onError');
                   });
                 },
                 child: const Text('Request Permisson')),
