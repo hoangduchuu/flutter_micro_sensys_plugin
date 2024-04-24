@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
             Center(
               child: Column(
                 children: [
-                  Text('Running on: $_platformVersion\n'),
+                  Text('Running on the: $_platformVersion\n'),
                   Text('_initializeStatus: $_initializeStatus\n'),
                   Text('_tagNumber : $_tagNumber\n'),
                 ],
