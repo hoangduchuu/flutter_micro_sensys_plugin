@@ -23,4 +23,16 @@ class MethodChannelMicroSensys extends MicroSensysPlatform {
   Future<String?> identifyTag() {
     return methodChannel.invokeMethod<String?>('identifyTag');
   }
+
+  Future<bool?> checkConnected() {
+    return methodChannel.invokeMethod<bool>('checkConnected');
+  }
+
+  Future<bool?> checkInitialized() {
+    return methodChannel.invokeMethod<bool>('checkInitialized');
+  }
+
+  Future<void> disConnect() {
+    return methodChannel.invokeMethod<void>('disConnect');
+  }
 }
