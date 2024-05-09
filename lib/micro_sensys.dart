@@ -28,4 +28,8 @@ class MicroSensys {
   Future disConnect() {
     return MicroSensysPlatform.instance.disConnect();
   }
+
+  Stream<String> listenTags() {
+    return MicroSensysPlatform.instance.listenTags();
+  }
 }

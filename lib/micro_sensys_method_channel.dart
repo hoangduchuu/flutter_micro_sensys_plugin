@@ -9,6 +9,8 @@ class MethodChannelMicroSensys extends MicroSensysPlatform {
   @visibleForTesting
   final methodChannel = const MethodChannel('micro_sensys');
 
+  final EventChannel eventChannel = const EventChannel('micro_sensys_events');
+
   @override
   Future<String?> getPlatformVersion() async {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
@@ -38,5 +40,9 @@ class MethodChannelMicroSensys extends MicroSensysPlatform {
 
   Future<void> disConnect() {
     return methodChannel.invokeMethod<void>('disConnect');
+  }
+
+  Stream<String> listenTags() {
+    return eventChannel.receiveBroadcastStream().cast<String>();
   }
 }

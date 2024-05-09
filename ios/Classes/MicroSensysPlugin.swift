@@ -7,14 +7,23 @@ public class MicroSensysPlugin: NSObject, FlutterPlugin, ShowConnectedDeviceInfo
     
 
     var isIntialized = false;
-    var mresult : FlutterResult?;
+    var streamHandler: MyStreamHandler?
+
+
  
     
   public static func register(with registrar: FlutterPluginRegistrar) {
     let channel = FlutterMethodChannel(name: "micro_sensys", binaryMessenger: registrar.messenger())
     let instance = MicroSensysPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
-    
+      
+      // stream event
+      
+      // Initialize MyStreamHandler and set it as the stream handler
+         instance.streamHandler = MyStreamHandler()
+         let eventChannel = FlutterEventChannel(name: "micro_sensys_events", binaryMessenger: registrar.messenger())
+         eventChannel.setStreamHandler(instance.streamHandler)
+
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -25,12 +34,14 @@ public class MicroSensysPlugin: NSObject, FlutterPlugin, ShowConnectedDeviceInfo
     case "initReader":
         initReader(result: result)
     case "initIOSReader":
-        mresult = result;
         initIosReader(call:call,result:result)
     case "disConnect":
         BleRfidLib.shared.DisconnectDevice()
     case"identifyTag":
         identifyTag(result: result)
+    case"checkConnected":
+        debugPrint("MicroSensysPlugin: checkConnected")
+        streamHandler?.eventSink?("SHOWDEVICE-checkConnected")
     case"showDevices":
         showDevice()
     default:
@@ -40,12 +51,13 @@ public class MicroSensysPlugin: NSObject, FlutterPlugin, ShowConnectedDeviceInfo
     
     public func identifyTag(result: FlutterResult){
         DispatchQueue.main.async {
+            debugPrint("MicroSensysPlugin: identifyTag")
             BleRfidLib.shared.Identify(info: AntennaInfo.Antenna_Info_On)
         }
     }
 
     public func showDevice(){
-        
+        streamHandler?.eventSink?("SHOWDEVICE")
     }
     
     public func disConnect(){
@@ -55,14 +67,15 @@ public class MicroSensysPlugin: NSObject, FlutterPlugin, ShowConnectedDeviceInfo
     // Method to initialize reader and set up callbacks
        public func initReader(result: FlutterResult) {
            
-           
+           debugPrint("MicroSensysPlugin: initReader")
     
        }
     
     public func initIosReader(call: FlutterMethodCall,result: FlutterResult){
         let myresult = call.arguments as? [String: Any]
 
-        
+        debugPrint("MicroSensysPlugin: initIosReader")
+
         if let deviceName = myresult?["deviceName"] as? String {
             // `deviceName` is a non-optional String here
             print("DeviceName: \(deviceName)")
@@ -95,24 +108,27 @@ public class MicroSensysPlugin: NSObject, FlutterPlugin, ShowConnectedDeviceInfo
        public func ShowConnectedDeviceInformation(info: [String : String]) {
            // Handle connected device information here
            // For example, you can log the information or pass it back to the Flutter app
-           print("Connected Device Info: \(info)")
+           debugPrint("MicroSensysPlugin: Connected Device Info: \(info)")
+
        }
 
        // Implement other callback methods similarly
        public func ShowDeviceBatteryStatus(status: String) {
            // Handle device battery status here
-           print("Device Battery Status: \(status)")
+           debugPrint("MicroSensysPlugin: Device Battery Status:: \(status)")
+
        }
 
        public func ShowStatusMessage(status: String) {
            // Handle status message here
-           print("Status Message: \(status)")
+           debugPrint("MicroSensysPlugin: Status Message: \(status)")
+
        }
 
        public func ShowResponseMessage(data: [String]) {
            // Handle response message here
-           print("Response Message: \(data)")
-           mresult?(data)
+           debugPrint("MicroSensysPlugin: Response Message: \(data)")
+           streamHandler?.eventSink?(data[0].uppercased())
        }
     
 
@@ -120,3 +136,31 @@ public class MicroSensysPlugin: NSObject, FlutterPlugin, ShowConnectedDeviceInfo
     
     //endregion
 }
+
+//region handler
+
+public class MyStreamHandler: NSObject,FlutterStreamHandler{
+var eventSink: FlutterEventSink?
+        
+        // Implement the onListen method
+    public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+    
+            self.eventSink = events
+            // Example: Send a sample event
+            events("MicroSensysPlugin: Registered")
+            // Return nil if no error
+            return nil
+        }
+        
+        // Implement the onCancel method
+    public func onCancel(withArguments arguments: Any?) -> FlutterError? {
+            // Stop emitting events here
+            self.eventSink = nil
+            
+            // Return nil if no error
+            return nil
+        }
+}
+
+
+//endregion handler
