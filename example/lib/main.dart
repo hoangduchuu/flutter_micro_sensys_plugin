@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -69,15 +71,7 @@ class _MyAppState extends State<MyApp> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  _microSensysPlugin.initReader().then((value) {
-                    setState(() {
-                      _initializeStatus = value == true ? 'Success' : 'Failed';
-                    });
-                  }).catchError((onError) {
-                    setState(() {
-                      _initializeStatus = 'Failed : ${onError.toString()}';
-                    });
-                  });
+                  _initReader();
                 },
                 child: const Text('Init Reader')),
             ElevatedButton(
@@ -146,5 +140,30 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+
+  void _initReader() {
+    if(Platform.isAndroid) {
+      _microSensysPlugin.initReader().then((value) {
+        setState(() {
+          _initializeStatus = value == true ? 'Success' : 'Failed';
+        });
+      }).catchError((onError) {
+        setState(() {
+          _initializeStatus = 'Failed : ${onError.toString()}';
+        });
+      });
+    }else{
+      _microSensysPlugin.initIOSReader(deviceName: "iID PENsolid PRO 1785").then((value) {
+        setState(() {
+          _initializeStatus = value == true ? 'Success' : 'Failed';
+        });
+      }).catchError((onError) {
+        setState(() {
+          _initializeStatus = 'Failed : ${onError.toString()}';
+        });
+      });
+    }
+   
   }
 }

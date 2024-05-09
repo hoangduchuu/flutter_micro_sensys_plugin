@@ -20,6 +20,10 @@ class MethodChannelMicroSensys extends MicroSensysPlatform {
     return methodChannel.invokeMethod<bool>('initReader');
   }
 
+  Future<bool?> initIOSReader({required String deviceName}) {
+    return methodChannel.invokeMethod<bool>('initIOSReader', {'deviceName': deviceName});
+  }
+
   Future<String?> identifyTag() {
     return methodChannel.invokeMethod<String?>('identifyTag');
   }

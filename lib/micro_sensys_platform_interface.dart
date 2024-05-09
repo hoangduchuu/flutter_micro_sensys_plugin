@@ -30,6 +30,11 @@ abstract class MicroSensysPlatform extends PlatformInterface {
   Future<bool?> initReader() {
     throw UnimplementedError('initReader() has not been implemented.');
   }
+
+  Future<bool?> initIOSReader({required String deviceName}) {
+    throw UnimplementedError('initReader() has not been implemented.');
+  }
+
   Future<String?> identifyTag() {
     throw UnimplementedError('identifyTag() has not been implemented.');
   }

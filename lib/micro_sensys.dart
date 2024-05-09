@@ -9,6 +9,10 @@ class MicroSensys {
     return MicroSensysPlatform.instance.initReader();
   }
 
+  Future<bool?> initIOSReader({required String deviceName}) {
+    return MicroSensysPlatform.instance.initIOSReader(deviceName: deviceName);
+  }
+
   Future<String?> identifyTag() {
     return MicroSensysPlatform.instance.identifyTag();
   }

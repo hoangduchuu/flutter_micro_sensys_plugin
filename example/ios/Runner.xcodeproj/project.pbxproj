@@ -489,6 +489,9 @@
 				DEVELOPMENT_TEAM = H99W294D9D;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Bluetooth is required to connect to the PENsolid PRO.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Bluetooth is required to connect to the PENsolid PRO.";
+				INFOPLIST_KEY_NSBluetoothWhileInUseUsageDescription = "Bluetooth is required to connect to the PENsolid PRO.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -670,6 +673,9 @@
 				DEVELOPMENT_TEAM = H99W294D9D;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Bluetooth is required to connect to the PENsolid PRO.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Bluetooth is required to connect to the PENsolid PRO.";
+				INFOPLIST_KEY_NSBluetoothWhileInUseUsageDescription = "Bluetooth is required to connect to the PENsolid PRO.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -693,6 +699,9 @@
 				DEVELOPMENT_TEAM = H99W294D9D;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Bluetooth is required to connect to the PENsolid PRO.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "Bluetooth is required to connect to the PENsolid PRO.";
+				INFOPLIST_KEY_NSBluetoothWhileInUseUsageDescription = "Bluetooth is required to connect to the PENsolid PRO.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

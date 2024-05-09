@@ -2,12 +2,15 @@ PODS:
   - Flutter (1.0.0)
   - integration_test (0.0.1):
     - Flutter
+  - micro_sensys (0.0.1):
+    - Flutter
   - permission_handler_apple (9.3.0):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - micro_sensys (from `.symlinks/plugins/micro_sensys/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
 
 EXTERNAL SOURCES:
@@ -15,12 +18,15 @@ EXTERNAL SOURCES:
     :path: Flutter
   integration_test:
     :path: ".symlinks/plugins/integration_test/ios"
+  micro_sensys:
+    :path: ".symlinks/plugins/micro_sensys/ios"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   integration_test: 13825b8a9334a850581300559b8839134b124670
+  micro_sensys: f5b29b9064c71ea8057b50fd9f81b9cd993bf328
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
 
 PODFILE CHECKSUM: 70d9d25280d0dd177a5f637cdb0f0b0b12c6a189
