@@ -18,8 +18,12 @@ class MethodChannelMicroSensys extends MicroSensysPlatform {
   }
 
 
-  Future<bool?> initReader() {
-    return methodChannel.invokeMethod<bool>('initReader');
+  Future<bool?> initReader({ String? frequencyType, String? communicationType}) {
+    var params = {
+      'frequencyType': frequencyType ?? 'UHF',
+      'communicationType': communicationType ?? 'BLE',
+    };
+    return methodChannel.invokeMethod<bool>('initReader', params);
   }
 
   Future<bool?> initIOSReader({required String deviceName}) {
