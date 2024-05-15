@@ -67,15 +67,11 @@ class MicroSensysPlugin : FlutterPlugin, MethodCallHandler {
     //region RFID Functions
     @SuppressLint("LongLogTag")
     private fun initReader(result: Result, call: MethodCall) {
-        /**
-         *     'frequencyType': frequencyType ?? 'UHF',
-         *       'communicationType': communicationType ?? 'BLE',
-         */
         try {
-            var args = call.arguments as Map<String, Any>;
+            val args = call.arguments as Map<String, Any>;
 
             //UHF, HF
-            var interfaceTypeString = args["frequencyType"] as String
+            val interfaceTypeString = args["frequencyType"] as String
 
             //BluetoothLE, BLE,USB
             val portTypeString = args["communicationType"] as String
