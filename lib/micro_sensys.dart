@@ -32,4 +32,8 @@ class MicroSensys {
   Stream<String> listenTags() {
     return MicroSensysPlatform.instance.listenTags();
   }
+
+  Stream<String> iosListenStatus() {
+    return MicroSensysPlatform.instance.iosListenStatus();
+  }
 }

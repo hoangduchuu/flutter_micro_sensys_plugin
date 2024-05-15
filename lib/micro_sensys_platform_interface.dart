@@ -52,6 +52,10 @@ abstract class MicroSensysPlatform extends PlatformInterface {
   }
 
   Stream<String> listenTags() {
-    throw UnimplementedError('disConnect() has not been implemented.');
+    throw UnimplementedError('listenTags() has not been implemented.');
+  }
+
+  Stream<String> iosListenStatus() {
+    throw UnimplementedError('iosListenStatus() has not been implemented.');
   }
 }

@@ -8,6 +8,7 @@ public class MicroSensysPlugin: NSObject, FlutterPlugin, ShowConnectedDeviceInfo
 
     var isIntialized = false;
     var streamHandler: MyStreamHandler?
+    var statusStreamHandler: MyStreamHandler?
 
 
  
@@ -24,6 +25,11 @@ public class MicroSensysPlugin: NSObject, FlutterPlugin, ShowConnectedDeviceInfo
          let eventChannel = FlutterEventChannel(name: "micro_sensys_events", binaryMessenger: registrar.messenger())
          eventChannel.setStreamHandler(instance.streamHandler)
 
+      
+      // Initialize StatusStreamHandler and set it as the stream handler
+      instance.statusStreamHandler = MyStreamHandler()
+      let eventChannelStatus = FlutterEventChannel(name: "micro_sensys_events_status", binaryMessenger: registrar.messenger())
+      eventChannelStatus.setStreamHandler(instance.statusStreamHandler)
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -92,7 +98,7 @@ public class MicroSensysPlugin: NSObject, FlutterPlugin, ShowConnectedDeviceInfo
                        sleep(1)
                    }
                }else{
-                   debugPrint("INTIALIZED: else cáe-----")
+                   debugPrint("INTIALIZED: else case-----")
                }
                isIntialized = true;
 
@@ -122,7 +128,9 @@ public class MicroSensysPlugin: NSObject, FlutterPlugin, ShowConnectedDeviceInfo
        public func ShowStatusMessage(status: String) {
            // Handle status message here
            debugPrint("MicroSensysPlugin: Status Message: \(status)")
-
+           var stt = "\(status)"
+           debugPrint("STT: ",stt)
+           statusStreamHandler?.eventSink?(stt)
        }
 
        public func ShowResponseMessage(data: [String]) {
@@ -164,3 +172,30 @@ var eventSink: FlutterEventSink?
 
 
 //endregion handler
+
+
+//region status handler
+
+public class StatusStreamHandler: NSObject,FlutterStreamHandler{
+var eventSink: FlutterEventSink?
+        
+        // Implement the onListen method
+    public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+    
+            self.eventSink = events
+            // Example: Send a sample event
+            events("MicroSensysPlugin: StatusStreamHandler Registered")
+            // Return nil if no error
+            return nil
+        }
+        
+        // Implement the onCancel method
+    public func onCancel(withArguments arguments: Any?) -> FlutterError? {
+            // Stop emitting events here
+            self.eventSink = nil
+            
+            // Return nil if no error
+            return nil
+        }
+}
+//endregion status handler
