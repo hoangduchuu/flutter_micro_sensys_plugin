@@ -1,0 +1,95 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
+// swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name microsensys_lib
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import CoreBluetooth
+import Foundation
+import Swift
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_exported import microsensys_lib
+@objc(ShowListFoundDevicesCallback) public protocol ShowListFoundDevicesCallback {
+  @objc func ShowListFoundDevices(devices: [Swift.String])
+}
+@objc(ShowListPairedDevicesCallback) public protocol ShowListPairedDevicesCallback {
+  @objc func ShowListPairedDevices(devices: [[Swift.String : Swift.String]])
+}
+@objc(ShowDeviceConnectionStatusCallback) public protocol ShowDeviceConnectionStatusCallback {
+  @objc func ShowDeviceConnectionStatus(connected: Swift.Bool)
+}
+@objc(ShowConnectedDeviceInformationCallback) public protocol ShowConnectedDeviceInformationCallback {
+  @objc func ShowConnectedDeviceInformation(info: [Swift.String : Swift.String])
+}
+@objc(ShowDeviceBatteryStatusCallback) public protocol ShowDeviceBatteryStatusCallback {
+  @objc func ShowDeviceBatteryStatus(status: Swift.String)
+}
+@objc(ShowStatusMessageCallback) public protocol ShowStatusMessageCallback {
+  @objc func ShowStatusMessage(status: Swift.String)
+}
+@objc(ShowResponseMessageCallback) public protocol ShowResponseMessageCallback {
+  @objc func ShowResponseMessage(data: [Swift.String])
+}
+@_inheritsConvenienceInitializers @objc(BleRfidLib) public class BleRfidLib : ObjectiveC.NSObject {
+  public static let shared: microsensys_lib.BleRfidLib
+  @objc override dynamic public init()
+  @objc public func InitShowListFoundDevicesCallback(delegate: Swift.AnyObject)
+  @objc public func InitShowListPairedDevicesCallback(delegate: Swift.AnyObject)
+  @objc public func InitShowDeviceConnectionStatusCallback(delegate: Swift.AnyObject)
+  @objc public func InitShowConnectedDeviceInformationCallback(delegate: Swift.AnyObject)
+  @objc public func InitShowDeviceBatteryStatusCallback(delegate: Swift.AnyObject)
+  @objc public func InitShowStatusMessageCallback(delegate: Swift.AnyObject)
+  @objc public func InitShowResponseMessageCallback(delegate: Swift.AnyObject)
+  @objc public func StartDeviceScan(scanDevice: microsensys_lib.ScanDevice)
+  @objc public func StopDeviceScan()
+  @objc public func ConnectDeviceByName(deviceName: Swift.String)
+  @objc public func DisconnectDevice()
+  @objc public func ReadBatteryStatus()
+  @objc public func ReadDeviceInformation()
+  @objc public func GetPairedDevices()
+  @objc public func Identify(info: microsensys_lib.AntennaInfo)
+  @objc public func SelectAntenna(antenna: microsensys_lib.Antenna)
+  @objc deinit
+}
+@objc public enum ScanDevice : Swift.Int {
+  case PenSolidPRO
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum Antenna : Swift.UInt8 {
+  case Antenna_1 = 0x01
+  case Antenna_2 = 0x02
+  case Antenna_All = 0x03
+  public init?(rawValue: Swift.UInt8)
+  public typealias RawValue = Swift.UInt8
+  public var rawValue: Swift.UInt8 {
+    get
+  }
+}
+@objc public enum AntennaInfo : Swift.UInt8 {
+  case Antenna_Info_On = 0x01
+  case Antenna_Info_Off = 0x02
+  public init?(rawValue: Swift.UInt8)
+  public typealias RawValue = Swift.UInt8
+  public var rawValue: Swift.UInt8 {
+    get
+  }
+}
+extension Foundation.Date {
+  public func withAddedSeconds(seconds: Swift.Double) -> Foundation.Date
+  public func withAddedMinutes(minutes: Swift.Double) -> Foundation.Date
+  public func withAddedHours(hours: Swift.Double) -> Foundation.Date
+  public func currentTimeInMilliSeconds() -> Swift.Int
+}
+extension microsensys_lib.ScanDevice : Swift.Equatable {}
+extension microsensys_lib.ScanDevice : Swift.Hashable {}
+extension microsensys_lib.ScanDevice : Swift.RawRepresentable {}
+extension microsensys_lib.Antenna : Swift.Equatable {}
+extension microsensys_lib.Antenna : Swift.Hashable {}
+extension microsensys_lib.Antenna : Swift.RawRepresentable {}
+extension microsensys_lib.AntennaInfo : Swift.Equatable {}
+extension microsensys_lib.AntennaInfo : Swift.Hashable {}
+extension microsensys_lib.AntennaInfo : Swift.RawRepresentable {}

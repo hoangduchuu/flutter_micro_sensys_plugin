@@ -27,11 +27,35 @@ abstract class MicroSensysPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  Future<bool?> initReader() {
+  Future<bool?> initReader({ String? frequencyType, String? communicationType}) {
+    throw UnimplementedError('initReader() has not been implemented.');
+  }
+
+  Future<bool?> initIOSReader({required String deviceName}) {
     throw UnimplementedError('initReader() has not been implemented.');
   }
 
   Future<String?> identifyTag() {
-    throw UnimplementedError('initReader() has not been implemented.');
+    throw UnimplementedError('identifyTag() has not been implemented.');
+  }
+
+  Future<bool?> checkConnected() {
+    throw UnimplementedError('checkConnected() has not been implemented.');
+  }
+
+  Future<bool?> checkInitialized() {
+    throw UnimplementedError('checkInitialized() has not been implemented.');
+  }
+
+  Future<void> disConnect() {
+    throw UnimplementedError('disConnect() has not been implemented.');
+  }
+
+  Stream<String> listenTags() {
+    throw UnimplementedError('listenTags() has not been implemented.');
+  }
+
+  Stream<String> iosListenStatus() {
+    throw UnimplementedError('iosListenStatus() has not been implemented.');
   }
 }

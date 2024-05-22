@@ -1,5 +1,8 @@
 package com.developerfect.microsensys.micro_sensys
 
+
+import de.microsensys.utils.InterfaceTypeEnum
+import de.microsensys.utils.PortTypeEnum
 import java.util.Locale
 
 class HelperFunctions {
@@ -17,5 +20,24 @@ class HelperFunctions {
             )
         }
         return var1.toString()
+    }
+
+    fun getInterfaceTypeFromString(interfaceTypeString: String): Int {
+        return when (interfaceTypeString) {
+            "LF" -> InterfaceTypeEnum.LF
+            "HF" -> InterfaceTypeEnum.HF
+            "UHF" -> InterfaceTypeEnum.UHF
+            else -> InterfaceTypeEnum.UHF
+        }
+    }
+
+    fun getPortTypeFromString(portTypeString: String): Int {
+        return when (portTypeString) {
+            "USB" -> PortTypeEnum.USB
+            "Bluetooth" -> PortTypeEnum.Bluetooth
+            "BluetoothLE" -> PortTypeEnum.BluetoothLE
+            "BLE" -> PortTypeEnum.BluetoothLE
+            else -> PortTypeEnum.BluetoothLE
+        }
     }
 }

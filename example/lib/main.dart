@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -61,7 +63,7 @@ class _MyAppState extends State<MyApp> {
             Center(
               child: Column(
                 children: [
-                  Text('Running on: $_platformVersion\n'),
+                  Text('Running on the: $_platformVersion\n'),
                   Text('_initializeStatus: $_initializeStatus\n'),
                   Text('_tagNumber : $_tagNumber\n'),
                 ],
@@ -69,41 +71,33 @@ class _MyAppState extends State<MyApp> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  _microSensysPlugin.initReader().then((value) {
-                    setState(() {
-                      _initializeStatus = value == true ? 'Success' : 'Failed';
-                    });
-                  }).catchError((onError) {
-                    setState(() {
-                      _initializeStatus = 'Failed : ${onError.toString()}';
-                    });
-                  });
+                  _initReader();
                 },
                 child: const Text('Init Reader')),
             ElevatedButton(
                 onPressed: () {
                   Permission.bluetooth.request().then((value) {
-                    print('Request Permisson: $value');
+                    print('Request Permisson1 OK: $value');
                   }).catchError((onError) {
-                    print('Request Permisson Error: $onError');
+                    print('Request Permisson1 Error: $onError');
                   });
 
                   Permission.bluetoothScan.request().then((value) {
-                    print('Request Permisson: $value');
+                    print('Request Permisson2 OK: $value');
                   }).catchError((onError) {
-                    print('Request Permisson Error: $onError');
+                    print('Request Permisson2 Error: $onError');
                   });
 
                   Permission.bluetoothConnect.request().then((value) {
-                    print('Request Permisson: $value');
+                    print('Request Permisson3 OK: $value');
                   }).catchError((onError) {
-                    print('Request Permisson Error: $onError');
+                    print('Request Permisson3 Error: $onError');
                   });
 
                   Permission.location.request().then((value) {
-                    print('Request Permisson: $value');
+                    print('Request Permisson4: $value');
                   }).catchError((onError) {
-                    print('Request Permisson Error: $onError');
+                    print('Request Permisson4 Error: $onError');
                   });
                 },
                 child: const Text('Request Permisson')),
@@ -146,5 +140,30 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+
+  void _initReader() {
+    if(Platform.isAndroid) {
+      _microSensysPlugin.initReader().then((value) {
+        setState(() {
+          _initializeStatus = value == true ? 'Success' : 'Failed';
+        });
+      }).catchError((onError) {
+        setState(() {
+          _initializeStatus = 'Failed : ${onError.toString()}';
+        });
+      });
+    }else{
+      _microSensysPlugin.initIOSReader(deviceName: "iID PENsolid PRO 1785").then((value) {
+        setState(() {
+          _initializeStatus = value == true ? 'Success' : 'Failed';
+        });
+      }).catchError((onError) {
+        setState(() {
+          _initializeStatus = 'Failed : ${onError.toString()}';
+        });
+      });
+    }
+   
   }
 }
