@@ -10,16 +10,17 @@ class MethodChannelMicroSensys extends MicroSensysPlatform {
   final methodChannel = const MethodChannel('micro_sensys');
 
   final EventChannel eventChannel = const EventChannel('micro_sensys_events');
-  final EventChannel eventChannelStatus = const EventChannel('micro_sensys_events_status');
+  final EventChannel eventChannelStatus =
+      const EventChannel('micro_sensys_events_status');
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version =
+        await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
 
-
-  Future<bool?> initReader({ String? frequencyType, String? communicationType}) {
+  Future<bool?> initReader({String? frequencyType, String? communicationType}) {
     var params = {
       'frequencyType': frequencyType ?? 'UHF',
       'communicationType': communicationType ?? 'BLE',
@@ -28,7 +29,8 @@ class MethodChannelMicroSensys extends MicroSensysPlatform {
   }
 
   Future<bool?> initIOSReader({required String deviceName}) {
-    return methodChannel.invokeMethod<bool>('initIOSReader', {'deviceName': deviceName});
+    return methodChannel
+        .invokeMethod<bool>('initIOSReader', {'deviceName': deviceName});
   }
 
   Future<String?> identifyTag() {
@@ -51,7 +53,7 @@ class MethodChannelMicroSensys extends MicroSensysPlatform {
     return eventChannel.receiveBroadcastStream().cast<String>();
   }
 
-  Stream<String> iosListenStatus(){
+  Stream<String> iosListenStatus() {
     return eventChannelStatus.receiveBroadcastStream().cast<String>();
   }
 }

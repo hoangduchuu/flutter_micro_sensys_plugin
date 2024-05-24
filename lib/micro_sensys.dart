@@ -5,8 +5,9 @@ class MicroSensys {
     return MicroSensysPlatform.instance.getPlatformVersion();
   }
 
-  Future<bool?> initReader({ String? frequencyType, String? communicationType}) {
-    return MicroSensysPlatform.instance.initReader(frequencyType: frequencyType, communicationType: communicationType);
+  Future<bool?> initReader({String? frequencyType, String? communicationType}) {
+    return MicroSensysPlatform.instance.initReader(
+        frequencyType: frequencyType, communicationType: communicationType);
   }
 
   Future<bool?> initIOSReader({required String deviceName}) {

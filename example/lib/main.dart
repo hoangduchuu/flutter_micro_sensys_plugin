@@ -36,7 +36,8 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion = await _microSensysPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _microSensysPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -116,24 +117,24 @@ class _MyAppState extends State<MyApp> {
                 child: const Text('Identify')),
             ElevatedButton(
                 onPressed: () {
-                Timer.periodic(Duration(milliseconds: 200), (timer) {
-                  _microSensysPlugin.identifyTag().then((value) {
-                    setState(() {
-                      _tagNumber = value.toString();
-                    });
-                  }).catchError((onError) {
-                    setState(() {
-                      _tagNumber = 'Failed : ${onError.toString()}';
+                  Timer.periodic(Duration(milliseconds: 200), (timer) {
+                    _microSensysPlugin.identifyTag().then((value) {
+                      setState(() {
+                        _tagNumber = value.toString();
+                      });
+                    }).catchError((onError) {
+                      setState(() {
+                        _tagNumber = 'Failed : ${onError.toString()}';
+                      });
                     });
                   });
-                });
                 },
                 child: const Text('Identify in Loop')),
             ElevatedButton(
                 onPressed: () {
-                 setState(() {
+                  setState(() {
                     _tagNumber = 'Cleared';
-                 });
+                  });
                 },
                 child: const Text('Clear TAG')),
           ],
@@ -143,7 +144,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _initReader() {
-    if(Platform.isAndroid) {
+    if (Platform.isAndroid) {
       _microSensysPlugin.initReader().then((value) {
         setState(() {
           _initializeStatus = value == true ? 'Success' : 'Failed';
@@ -153,8 +154,10 @@ class _MyAppState extends State<MyApp> {
           _initializeStatus = 'Failed : ${onError.toString()}';
         });
       });
-    }else{
-      _microSensysPlugin.initIOSReader(deviceName: "iID PENsolid PRO 1785").then((value) {
+    } else {
+      _microSensysPlugin
+          .initIOSReader(deviceName: "iID PENsolid PRO 1785")
+          .then((value) {
         setState(() {
           _initializeStatus = value == true ? 'Success' : 'Failed';
         });
@@ -164,6 +167,5 @@ class _MyAppState extends State<MyApp> {
         });
       });
     }
-   
   }
 }
