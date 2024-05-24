@@ -1,6 +1,6 @@
 name: micro_sensys
-description: "Micro-Sensys plugin"
-version: 0.0.1
+description: "Micro-Sensys plugin for Flutter. This plugin is a wrapper for the Micro-Sensys SDK."
+version: 0.0.1+1
 homepage: https://github.com/hoangduchuu/flutter_micro_sensys_plugin
 
 environment:
