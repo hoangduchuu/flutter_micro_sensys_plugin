@@ -45,6 +45,10 @@ class MethodChannelMicroSensys extends MicroSensysPlatform {
     return methodChannel.invokeMethod<bool>('checkInitialized');
   }
 
+  Future<bool?> checkConnecting() {
+    return methodChannel.invokeMethod<bool>('checkConnecting');
+  }
+
   Future<void> disConnect() {
     return methodChannel.invokeMethod<void>('disConnect');
   }

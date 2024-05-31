@@ -49,7 +49,10 @@ class MicroSensysPlugin : FlutterPlugin, MethodCallHandler {
                 checkConnected(result)
             }
             "checkInitialized" -> {
-                checkConnected(result)
+                checkInitialized(result)
+            }
+            "checkConnecting" -> {
+                checkConnecting(result)
             }
             "disConnect" -> {
                 disConnect(result)
@@ -130,6 +133,17 @@ class MicroSensysPlugin : FlutterPlugin, MethodCallHandler {
     // region checkInitialized
     private fun checkInitialized(result: Result) {
         if (reader != null) {
+            result.success(true)
+        } else {
+            result.success(false)
+        }
+    }
+    // endregion checkInitialized
+
+
+    // region checkInitialized
+    private fun checkConnecting(result: Result) {
+        if (reader?.isConnecting == true) {
             result.success(true)
         } else {
             result.success(false)

@@ -22,6 +22,10 @@ class MicroSensys {
     return MicroSensysPlatform.instance.checkConnected();
   }
 
+  Future<bool?> checkConnecting() {
+    return MicroSensysPlatform.instance.checkConnecting();
+  }
+
   Future<bool?> checkInitialized() {
     return MicroSensysPlatform.instance.checkInitialized();
   }

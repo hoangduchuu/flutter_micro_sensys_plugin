@@ -47,6 +47,10 @@ abstract class MicroSensysPlatform extends PlatformInterface {
     throw UnimplementedError('checkInitialized() has not been implemented.');
   }
 
+  Future<bool?> checkConnecting() {
+    throw UnimplementedError('checkConnecting() has not been implemented.');
+  }
+
   Future<void> disConnect() {
     throw UnimplementedError('disConnect() has not been implemented.');
   }

@@ -9,6 +9,60 @@ class MockMicroSensysPlatform
     implements MicroSensysPlatform {
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
+
+  @override
+  Future<bool?> checkConnected() {
+    // TODO: implement checkConnected
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool?> checkConnecting() {
+    // TODO: implement checkConnecting
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool?> checkInitialized() {
+    // TODO: implement checkInitialized
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> disConnect() {
+    // TODO: implement disConnect
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String?> identifyTag() {
+    // TODO: implement identifyTag
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool?> initIOSReader({required String deviceName}) {
+    // TODO: implement initIOSReader
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool?> initReader({String? frequencyType, String? communicationType}) {
+    // TODO: implement initReader
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream<String> iosListenStatus() {
+    // TODO: implement iosListenStatus
+    throw UnimplementedError();
+  }
+
+  @override
+  Stream<String> listenTags() {
+    // TODO: implement listenTags
+    throw UnimplementedError();
+  }
 }
 
 void main() {
